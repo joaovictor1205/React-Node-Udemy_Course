@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
 import './calculadora.css';
-import { Jumbotron, Container, Row, Col, Button, Form } from 'react-bootstrap'
+import { Jumbotron, Container, Row, Col, Button, Form } from 'react-bootstrap';
+import CalculadoraService from './calculadora.service';
 
 function Calculadora() {
 
   const [txtNumeros, setTxtNumeros] = useState('0');
+  const [calcular, concatenarNumero, SOMA, SUBTRACAO, DIVISAO, MULTIPLICACAO] = CalculadoraService();
+  const [numero1, setNumero1] = useState('0');
+  const [numero2, setNumero2] = useState(null);
+  const [operador, setOperador] = useState(null);
 
   function alterarNumero(numero){
-    setTxtNumeros(txtNumeros + numero);
+    let resultado;
+
+    if (operador === null) {
+      resultado = concatenarNumero(numero1, numero);
+      setNumero1(resultado);
+    } else{
+      resultado = concatenarNumero(numero2, numero);
+      setNumero2(resultado);
+    }
+    setTxtNumeros(resultado);
   }
 
   function definirOperacao(operador){

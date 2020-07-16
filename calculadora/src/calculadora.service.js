@@ -29,7 +29,31 @@ function CalculadoraService(){
         return resultado;
     }
 
-    return [calcular, SOMA , SUBTRACAO, DIVISAO, MULTIPLICACAO];
+    function concatenarNumero(numeroAtual, numeroConcat){
+
+        if (numeroAtual === '0' || numeroAtual === null){
+            numeroAtual = '';
+        }
+
+        if (numeroAtual === '.' && numeroAtual === ''){
+            return '0.';
+        }
+
+        if (numeroConcat === '.' && numeroAtual.indexOf('.') > -1){
+            return numeroAtual
+        }
+
+        return numeroAtual + numeroConcat;
+    }
+
+    return [
+        calcular, 
+        concatenarNumero,
+        SOMA,
+        SUBTRACAO, 
+        DIVISAO, 
+        MULTIPLICACAO
+    ];
 
 }
 

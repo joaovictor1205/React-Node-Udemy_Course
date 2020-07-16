@@ -4,7 +4,7 @@ import CalculadoraService from './calculadora.service';
 
 describe ('Teste do CalculadoraService', () => {
 
-    const [calcular, SOMA, SUBTRACAO, DIVISAO, MULTIPLICACAO] = CalculadoraService();
+    const [calcular, concatenarNumero, SOMA, SUBTRACAO, DIVISAO, MULTIPLICACAO] = CalculadoraService();
 
     it('Testar a Operação de Soma', () => {
         let soma = calcular(1,4, SOMA);
