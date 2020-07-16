@@ -78,6 +78,7 @@ function Calculadora() {
               className="text-right"
               readOnly="readOnly"
               value={txtNumeros}
+              data-testid="txtNumeros"
             />
 
           </Col>
@@ -97,7 +98,7 @@ function Calculadora() {
           </Col>
 
           <Col>
-            <Button variant='warning' onClick={ () => definirOperacao('/')}> / </Button>
+            <Button variant='warning' onClick={ () => definirOperacao(DIVISAO)}> / </Button>
           </Col>
         </Row>
 
@@ -115,7 +116,7 @@ function Calculadora() {
           </Col>
 
           <Col>
-            <Button variant='warning' onClick={ () => definirOperacao('*')}> * </Button>
+            <Button variant='warning' onClick={ () => definirOperacao(MULTIPLICACAO)}> * </Button>
           </Col>
         </Row>
 
@@ -133,7 +134,7 @@ function Calculadora() {
           </Col>
 
           <Col>
-            <Button variant='warning' onClick={ () => definirOperacao('-')}> - </Button>
+            <Button variant='warning' onClick={ () => definirOperacao(SUBTRACAO)}> - </Button>
           </Col>
         </Row>
 
@@ -151,7 +152,7 @@ function Calculadora() {
           </Col>
 
           <Col>
-            <Button variant='warning' onClick={ () => definirOperacao('+')}> + </Button>
+            <Button variant='warning' onClick={ () => definirOperacao(SOMA)}> + </Button>
           </Col>
         </Row>
 
