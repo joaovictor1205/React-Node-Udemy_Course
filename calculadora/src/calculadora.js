@@ -24,8 +24,34 @@ function Calculadora() {
     setTxtNumeros(resultado);
   }
 
-  function definirOperacao(operador){
-    setTxtNumeros(operador);
+  function definirOperacao(op){
+    if(operador === null){
+      setOperador(op);
+      return;
+    }
+
+    if(numero2 != null){
+      const resultado = calcular(parseFloat(numero1), parseFloat(numero2), operador);
+      setOperador(op);
+      setNumero1(resultado.toString());
+      setNumero2(null);
+      setTxtNumeros(resultado.toString());
+    }
+  }
+
+  function acaoBotao(){
+    if(numero2 === null){
+      return;
+    }
+    const resultado = calcular(parseFloat(numero1), parseFloat(numero2), operador);
+    setTxtNumeros(resultado);
+  }
+
+  function limparCampo(){
+    setTxtNumeros('0');
+    setNumero1('0');
+    setNumero2(null);
+    setOperador(null);
   }
 
   return (
@@ -43,7 +69,7 @@ function Calculadora() {
       <Container>
         <Row>
           <Col xs='3'>
-            <Button variant='danger'> C </Button>
+            <Button variant='danger' onClick = {limparCampo}> C </Button>
           </Col>
 
           <Col xs='9'>
@@ -121,7 +147,7 @@ function Calculadora() {
           </Col>
 
           <Col>
-            <Button variant='success'> = </Button>
+            <Button variant='success' onClick={acaoBotao} > = </Button>
           </Col>
 
           <Col>
