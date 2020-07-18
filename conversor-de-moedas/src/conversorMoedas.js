@@ -1,6 +1,6 @@
 import React from 'react';
 import './conversorMoedas.css';
-import { Jumbotron, Button, Form, Col, Spinner, FormGroup } from 'react-bootstrap';
+import { Jumbotron, Button, Form, Col, Spinner, FormGroup, Alert, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,6 +9,10 @@ function ConversorMoedas() {
     <div>
 
       <h1> Conversor de Moedas </h1>
+
+      <Alert variant="danger" show={false}>
+        Erro! Tente novamente
+      </Alert>
 
       <Jumbotron>
         <Form>
@@ -46,6 +50,21 @@ function ConversorMoedas() {
   
           </Form.Row>
         </Form>
+
+        <Modal show={false}>
+          <Modal.Header closeButton>
+            <Modal.Title> Conversão </Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            Resultado da conversão
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="success">Nova conversão</Button>
+          </Modal.Footer>
+        </Modal>
+
       </Jumbotron>
   
     </div>
