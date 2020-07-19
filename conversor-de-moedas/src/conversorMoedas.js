@@ -17,6 +17,7 @@ function ConversorMoedas() {
   const [ formValidado, setFormValidado ] = useState(false);
   const [ exibirModal, setExibirModal ] = useState(false);
   const [ resultadoConversao, setResultadoConversao ] = useState('');
+  const [ alertaErro, setAlertaErro ] = useState(false);
 
   function handleValor(event){
     setValor(event.target.value.replace(/\D/g, '')); 
@@ -46,10 +47,18 @@ function ConversorMoedas() {
       axios.get(FIXER_IO_URL)
         .then(res => {
           const cotacao = obterCotacao(res.data);
-          setResultadoConversao(`${valor} ${moedaDe} = ${cotacao} ${moedaPara}`);
-          setExibirModal(true);
-          setExibirSpinner(false);
-        });
+          if (cotacao){
+            setResultadoConversao(`${valor} ${moedaDe} = ${cotacao} ${moedaPara}`);
+            setExibirModal(true);
+            setExibirSpinner(false);
+            setAlertaErro(false);
+          } else{
+            obterErro();
+          }
+        })
+        .catch(err =>
+          obterErro()
+        );
     }
   }
 
@@ -65,12 +74,17 @@ function ConversorMoedas() {
     return cotacao.toFixed(2);
   }
 
+  function obterErro(event){
+    setAlertaErro(true);
+    setExibirSpinner(false);
+  }
+
   return (
     <div>
 
       <h1> Conversor de Moedas </h1>
 
-      <Alert variant="danger" show={false}>
+      <Alert variant="danger" show={alertaErro}>
         Erro! Tente novamente
       </Alert>
 
