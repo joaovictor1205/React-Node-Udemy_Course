@@ -4,6 +4,6 @@ import GerenciadorTarefas from './gerenciadorTarefas';
 
 test('renders learn react link', () => {
   const { getByText } = render(<GerenciadorTarefas />);
-  const linkElement = getByText(/Listar Tarefas/i);
+  const linkElement = getByText(/Nova Tarefa/i);
   expect(linkElement).toBeInTheDocument();
 });

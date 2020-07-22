@@ -47,7 +47,8 @@ function CadastrarTarefas(){
                             maxLength="100"
                             required
                             value={tarefa}
-                            onChange={handleTxtTarefa} />
+                            onChange={handleTxtTarefa}
+                            data-testid="txt-tarefa" />
                         <Form.Control.Feedback type="invalid">
                             Atenção! Digite pelo menos 3 caracteres para o nome.
                         </Form.Control.Feedback>
@@ -56,7 +57,8 @@ function CadastrarTarefas(){
                         <Button
                             variant="success"
                             type="submit"
-                            style={ {marginRight: "5px"} }>
+                            style={ {marginRight: "5px"} }
+                            data-testid="btn-cadastrar">
                             Cadastrar
                         </Button>
                         <A href="/" className="btn btn-primary">
@@ -65,7 +67,7 @@ function CadastrarTarefas(){
                     </Form.Group>
                 </Form>
 
-                <Modal show={exibirModal} onHide={handleFecharModal}>
+                <Modal show={exibirModal} onHide={handleFecharModal} data-testid="modal">
                     <Modal.Header closeButton>
                         <Modal.Title> Sucesso </Modal.Title>
                     </Modal.Header>
