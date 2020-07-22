@@ -4,11 +4,30 @@ import { navigate, A } from 'hookrouter';
 
 function CadastrarTarefas(){
 
+    const [tarefa, setTarefa] = useState('');
+    const [formValidado, setFormValidado] = useState(false);
+    const [exibirModal, setExibirModal] = useState(false);
+
+    function cadastrar(event){
+        
+    }
+
+    function handleTxtTarefa(event){
+        setTarefa(event.target.value);
+    }
+
+    function handleFecharModal(){
+        navigate('/');
+    }
+
     return (
         <div>
             <h3 className="text-center"> Cadastrar Tarefas </h3>
             <Jumbotron>
-                <Form>
+                <Form
+                    validated={formValidado}
+                    noValidate
+                    onSubmit={cadastrar} >
                     <Form.Group>
                         <Form.Label> Tarefa </Form.Label>
                         <Form.Control 
@@ -16,7 +35,9 @@ function CadastrarTarefas(){
                             placeholder="Nome da tarefa"
                             minLength="5"
                             maxLength="100"
-                            required />
+                            required
+                            value={tarefa}
+                            onChange={handleTxtTarefa} />
                         <Form.Control.Feedback type="invalid">
                             Atenção! Digite pelo menos 3 caracteres para o nome.
                         </Form.Control.Feedback>
@@ -34,7 +55,7 @@ function CadastrarTarefas(){
                     </Form.Group>
                 </Form>
 
-                <Modal show={false}>
+                <Modal show={exibirModal} onHide={handleFecharModal}>
                     <Modal.Header closeButton>
                         <Modal.Title> Sucesso </Modal.Title>
                     </Modal.Header>
@@ -43,7 +64,8 @@ function CadastrarTarefas(){
                     </Modal.Body>
                     <Modal.Footer>
                         <Button
-                            variant="success">
+                            variant="success"
+                            onClick={handleFecharModal}>
                             Continuar
                         </Button>
                     </Modal.Footer>
