@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { A } from 'hookrouter';
+import ConcluirTarefa from './concluirTarefa';
 
 function ItensListarTarefas(props){
 
@@ -19,6 +20,11 @@ function ItensListarTarefas(props){
                     {tarefa.nome}
                 </td>
                 <td className={"text-center"}>
+                    <ConcluirTarefa 
+                        tarefas={tarefa}
+                        recarregarTarefas={props.recarregarTarefas}
+                        className={tarefa.concluida ? 'hidden' : null} />
+
                     <A href={"/atualizar/" + tarefa.id }
                         className={tarefa.concluida ? 'hidden' : 'btn btn-warning btn-sm'}>
                         <FontAwesomeIcon icon={faEdit} />

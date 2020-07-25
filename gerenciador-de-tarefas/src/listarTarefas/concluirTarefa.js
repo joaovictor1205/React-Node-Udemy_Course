@@ -10,19 +10,19 @@ function ConcluirTarefa(props){
 
     function handleAbrirModal(event){
         event.preventDefault();
-        setExibirModal=true;
+        setExibirModal(true);
     }
 
     function handleFecharModal(){
-        setExibirModal=false;
+        setExibirModal(false);
     }
 
-    function hadleConcluirTarefa(event){
+    function handleConcluirTarefa(event){
         event.preventDefault();
         const tarefasDB = localStorage['tarefas'];
         let tarefas = tarefasDB ? JSON.parse(tarefasDB) : [];
         tarefas = tarefas.map( tarefa => {
-            if(tarefa.id === props.tarefa.id){
+            if(tarefa.id === props.tarefas.id){
                 tarefa.concluida = true;
             }
             return tarefa;
@@ -49,11 +49,11 @@ function ConcluirTarefa(props){
                 <Modal.Body>
                     <h3>Deseja concluir a seguinte tarefa?</h3>
                     <br/>
-                    <strong>{props.tarefa.nome}</strong>
+                    <strong>{props.tarefas.nome}</strong>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="success" onClick={hadleConcluirTarefa} data-testid="btn-concluir">
+                    <Button variant="success" onClick={handleConcluirTarefa} data-testid="btn-concluir">
                         Sim
                     </Button>
 
