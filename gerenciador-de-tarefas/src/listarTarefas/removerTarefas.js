@@ -17,6 +17,16 @@ function RemoverTarefas(props){
         setExibirModal(false);
     }
 
+    function handleRemoverTarefa(event){
+        event.preventDefault();
+        const tarefasDB = localStorage['tarefas'];
+        let tarefas = tarefasDB ? JSON.parse(tarefasDB) : [];
+        tarefas = tarefas.filter(tarefa => tarefa.id !== props.tarefas.id);
+        localStorage['tarefas'] = JSON.stringify(tarefas);
+        setExibirModal(false);
+        props.recarregarTarefas(true);
+    }
+
     return (
         <span>
             <Button variant="danger"

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { A } from 'hookrouter';
 import ConcluirTarefa from './concluirTarefa';
+import RemoverTarefas from './removerTarefas';
 
 function ItensListarTarefas(props){
 
@@ -23,12 +24,18 @@ function ItensListarTarefas(props){
                     <ConcluirTarefa 
                         tarefas={tarefa}
                         recarregarTarefas={props.recarregarTarefas}
-                        className={tarefa.concluida ? 'hidden' : null} />
-
+                        className={tarefa.concluida ? 'hidden' : null}
+                    />
+                    &nbsp;
                     <A href={"/atualizar/" + tarefa.id }
                         className={tarefa.concluida ? 'hidden' : 'btn btn-warning btn-sm'}>
                         <FontAwesomeIcon icon={faEdit} />
                     </A>
+                    &nbsp;
+                    <RemoverTarefas 
+                        tarefas={tarefa}
+                        recarregarTarefas={props.recarregarTarefas}
+                    />
                 </td>
             </tr>
         )
