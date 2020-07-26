@@ -6,9 +6,9 @@ import ListarTarefas from './listarTarefas';
 describe('Testar o componente ListarTarefas', () => {
 
     it('Renderizar o componente ListarTarefas', () => {
-        const { getByText } = render(<ListarTarefas />);
-        const linkElement = getByText(/Listar Tarefas/i);
-        expect(linkElement).toBeInTheDocument();
+        const div = document.createElement('div');
+        ReactDOM.render(<ListarTarefas />, div);
+        ReactDOM.unmountComponentAtNode(div);
     });
 
 });
