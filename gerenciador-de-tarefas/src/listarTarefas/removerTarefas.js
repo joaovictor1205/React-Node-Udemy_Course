@@ -60,7 +60,7 @@ function RemoverTarefas(props){
 }
 
 RemoverTarefas.propTypes = {
-    tarefa: PropTypes.object.isRequired,
+    tarefas: PropTypes.object.isRequired,
     recarregarTarefas: PropTypes.func.isRequired,
 }
 
