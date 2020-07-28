@@ -1,28 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { A } from 'hookrouter';
-import { Table } from 'react-bootstrap';
+import { Table, Pagination } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import ItensListarTarefas from './itensListarTarefas';
+import Paginacao from './paginacao';
 
 function ListarTarefas(){
 
+    const ITENS_POR_PAG = 3;
+
     const [tarefas, setTarefas] = useState([]);
     const [carregarTarefas, setCarregarTarefas] = useState(true);
+    const [totalItems, setTotalItems] = useState(0);
+    const [paginaAtual, setPaginaAtual] = useState(1);
 
     useEffect(() => {
         function obterTarefas(){
             const tarefasDB = localStorage['tarefas'];
-            let listarTarefas = tarefasDB ? JSON.parse(tarefasDB) : [];
-            setTarefas(listarTarefas);
-            console.log(listarTarefas);
+            let listaTarefas = tarefasDB ? JSON.parse(tarefasDB) : [];
+            setTotalItems(listaTarefas.length);
+            setTarefas(listaTarefas.splice((paginaAtual -1 ) * ITENS_POR_PAG, ITENS_POR_PAG));
         }
 
         if (carregarTarefas){
             obterTarefas();
             setCarregarTarefas(false);
         }
-    }, [carregarTarefas]);
+    }, [carregarTarefas, paginaAtual]);
+
+    function handleMudarPagina(pagina){
+        setPaginaAtual(pagina);
+        setCarregarTarefas(true);
+    }
 
     return (
         <div className='text-center'>
@@ -51,6 +61,12 @@ function ListarTarefas(){
                 </tbody>
             </Table>
 
+        <Paginacao 
+            totalItems={totalItems}
+            itemsPorPagina={ITENS_POR_PAG}
+            paginaAtual={paginaAtual}
+            mudarPagina={handleMudarPagina}
+        />
         </div>
     );
 }

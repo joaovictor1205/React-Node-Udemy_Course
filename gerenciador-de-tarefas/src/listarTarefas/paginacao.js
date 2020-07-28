@@ -24,7 +24,7 @@ function Paginacao(props){
         );
     }
 
-    function gerarItemNumerico(){
+    function gerarItemNumerico(pagina){
         return (
             <Pagination.Item
                 key={pagina}
