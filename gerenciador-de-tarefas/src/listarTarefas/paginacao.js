@@ -83,7 +83,7 @@ Paginacao.propTypes = {
     totalItems: PropTypes.number.isRequired,
     itemsPorPagina: PropTypes.number.isRequired,
     paginaAtual: PropTypes.number.isRequired,
-    mudarPagina: PropTypes.number.isRequired,
+    mudarPagina: PropTypes.func.isRequired,
 }
 
 export default Paginacao;
