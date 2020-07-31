@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
-import PropTypes, { func } from 'prop-types';
+import PropTypes from 'prop-types';
 
 function Ordenacao(props){
 
@@ -21,19 +21,19 @@ function Ordenacao(props){
         <span>
             <FontAwesomeIcon
                 icon={faSort}
-                className={handleAscDesc}
+                className={handleAscDesc()}
                 data-testid="faSort"
             />
 
             <FontAwesomeIcon
                 icon={faSortUp}
-                className={handleAsc}
+                className={handleAsc()}
                 data-testid="faSortUp"
             />
 
             <FontAwesomeIcon
                 icon={faSortDown}
-                className={handleDesc}
+                className={handleDesc()}
                 data-testid="faSortDown"
             />
         </span>
