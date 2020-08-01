@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Jumbotron, Form, Modal, ModalDialog } from 'react-bootstrap';
+import { Button, Jumbotron, Form, Modal } from 'react-bootstrap';
 import { navigate, A } from 'hookrouter';
 
 function AtualizarTarefas(props){
@@ -8,6 +8,19 @@ function AtualizarTarefas(props){
     const [exibirModal, setExibirModal] = useState(false);
     const [formValidado, setFormValidado] = useState(false);
     const [tarefa, setTarefa] = useState('');
+    const [carregarTarefas, setCarregarTarefas] = useState(true);
+
+    useEffect( () => {
+        if(carregarTarefas){
+            const tarefasDB = localStorage['tarefas'];
+            const tarefas = tarefasDB ? JSON.parse(tarefasDB) : [];
+            const tarefa = tarefas.filter(
+                t => t.id === parseInt(props.id)
+            )[0];
+            setTarefa(tarefa.nome);
+            setCarregarTarefas(false);
+        }
+    }, [carregarTarefas, props.id]);
 
     function voltar(event){
         event.preventDefault();
@@ -18,7 +31,7 @@ function AtualizarTarefas(props){
         event.preventDefault();
         setFormValidado(true);
         if(event.currentTarget.checkValidity() === true){
-            //setExibirModal(true);
+            setExibirModal(true);
         }
     }
 
