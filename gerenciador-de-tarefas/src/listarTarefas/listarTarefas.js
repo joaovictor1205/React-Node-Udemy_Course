@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { A } from 'hookrouter';
-import { Table } from 'react-bootstrap';
+import { Table, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import ItensListarTarefas from './itensListarTarefas';
@@ -17,20 +17,26 @@ function ListarTarefas(){
     const [paginaAtual, setPaginaAtual] = useState(1);
     const [ordenarAsc, setOrdenarAsc] = useState(false);
     const [ordenarDesc, setOrdenarDesc] = useState(false);
+    const [filtroTarefa, setFiltroTarefa] = useState('');
 
     useEffect(() => {
         function obterTarefas(){
             const tarefasDB = localStorage['tarefas'];
             let listaTarefas = tarefasDB ? JSON.parse(tarefasDB) : [];
 
-            //// ordenar tarefas ////
+            // filtrar tarefas //
+            listaTarefas = listaTarefas.filter( 
+                t => t.nome.toLowerCase().indexOf(filtroTarefa.toLowerCase()) === 0
+            );
+
+            // ordenar tarefas //
             if (ordenarAsc){
                 listaTarefas.sort( (t1, t2) => ( t1.nome.toLowerCase() > t2.nome.toLowerCase() ? 1 : -1 ) );
             } else if(ordenarDesc){
                 listaTarefas.sort( (t1, t2) => ( t1.nome.toLowerCase() < t2.nome.toLowerCase() ? 1 : -1 ) );
             }
-            // END ordenar tarefas //
 
+            // paginar tarefas ///
             setTotalItems(listaTarefas.length);
             setTarefas(listaTarefas.splice((paginaAtual -1 ) * ITENS_POR_PAG, ITENS_POR_PAG));
         }
@@ -39,7 +45,7 @@ function ListarTarefas(){
             obterTarefas();
             setCarregarTarefas(false);
         }
-    }, [carregarTarefas, paginaAtual, ordenarAsc, ordenarDesc]);
+    }, [carregarTarefas, paginaAtual, ordenarAsc, ordenarDesc, filtroTarefa]);
 
     function handleMudarPagina(pagina){
         setPaginaAtual(pagina);
@@ -58,6 +64,11 @@ function ListarTarefas(){
             setOrdenarAsc(false);
             setOrdenarDesc(false);
         }
+        setCarregarTarefas(true);
+    }
+
+    function handleFiltrar(event){
+        setFiltroTarefa(event.target.value);
         setCarregarTarefas(true);
     }
 
@@ -86,6 +97,16 @@ function ListarTarefas(){
                                 &nbsp;
                                 Nova Tarefa
                             </A>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <Form.Control
+                                type="text" 
+                                value={filtroTarefa} 
+                                onChange={handleFiltrar}
+                                className="filtroTarefa"
+                                data-testeid="txt-tarefa" />
                         </th>
                     </tr>
                 </thead>
