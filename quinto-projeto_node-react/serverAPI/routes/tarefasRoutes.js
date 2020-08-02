@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { listarUmaTarefa } = require('../contollers/gerenciadorTarefas');
+const { listarUmaTarefa, listarTarefas } = require('../contollers/gerenciadorTarefas');
 
 // Listar todas as tarefas
-router.get('/', (req, res) => {
-    res.status(501).send({ message: 'Lista tarefas' });
-});
+router.get('/', listarTarefas);
 
 // Listar uma tarefa pelo id
 router.get('/:id', listarUmaTarefa);
