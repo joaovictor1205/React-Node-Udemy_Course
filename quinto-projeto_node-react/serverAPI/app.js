@@ -7,10 +7,20 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-//ROTAS
-app.get('/', (req, res) => {
-    res.send('Hello World');
-})
+///////////////// ROTAS /////////////////
+
+// Listar todas as tarefas
+app.get('/gerenciador-tarefas', (req, res) => {
+    res.status(501).send({ message: 'Não Implementado!'});
+});
+
+// Listar uma tarefa pelo id
+app.get('/gerenciador-tarefas/:id', (req, res) => {
+    res.send({ message: req.params.id});
+});
+
+////////////// END ROTAS ////////////////
+
 
 app.listen(process.env.PORT, () => {
     console.log(`Servidor ouvindo na porta ${process.env.PORT}`);
