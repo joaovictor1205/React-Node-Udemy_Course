@@ -1,4 +1,4 @@
-const uuid = require('uuid');
+const uuid = require('uuid').v4;
 
 // Armazenar tarefas em memória
 let tarefas = [
@@ -61,7 +61,21 @@ function listarTarefas(req, res){
     });
 }
 
+function cadastrarTarefa(req, res){
+    if(!req.body.nome && !req.body.concluida){
+        res.status(400).json({erro: "Requisição Inválida"});
+    }
+    const tarefa = {
+        id: uuid(),
+        nome: req.body.nome,
+        concluida: req.body.concluida,
+    };
+    tarefas.push(tarefa);
+    res.json(tarefa);
+}
+
 module.exports = {
     listarUmaTarefa,
     listarTarefas,
+    cadastrarTarefa,
 }
